@@ -5,7 +5,6 @@ import Account from "../components/Account";
 import Hero from "../components/Hero";
 import Container from "../components/Container";
 import Layout from "../components/Layout";
-import "../App.css";
 
 export default function Home() {
 	const [session, setSession] = useState(null);

@@ -3,6 +3,6 @@ import { coverLetterFormSlice } from './coverLetterFormSlice';
 
 export const store = configureStore({
   reducer: {
-    counter: coverLetterFormSlice,
+    coverLetterFormSlice: coverLetterFormSlice.reducer,
   },
 });
