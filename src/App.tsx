@@ -2,7 +2,7 @@ import { Routes, Route } from "react-router-dom";
 import Home from "./pages/home";
 import CoverLetter from "./pages/CoverLetter";
 
-function App() {
+function App(): JSX.Element {
 	return (
     <Routes>
 			<Route path="/" element={<Home />} />
