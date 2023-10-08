@@ -1,13 +1,13 @@
 import { Link } from "react-router-dom";
 import Container from "./ui/Container";
-import { Button } from "./ui/button";
 import { Sun, Moon } from "lucide-react";
-import ProfileButton from "./ui/ProfileButton";
 
 const Header = () => {
 	const links = [
 		{ to: "/", text: "Home" },
 		{ to: "/cover", text: "Cover Letter" },
+		{ to: "/login", text: "Login" },
+		{ to: "/register", text: "Register" },
 	];
 
 	return (
@@ -19,9 +19,8 @@ const Header = () => {
 							<h1 className="text-2xl font-bold text-white">RHX </h1>
 						</Link>
 					</div>
-					{/* <nav className="mx-6 flex items-center md:block space-x-4 lg:space-x-6 hidden">
+					<nav className="mx-6 flex items-center md:block space-x-4 lg:space-x-6 hidden">
 						{links.map(({ to, text }, i) => (
-							<Button asChild variant="ghost" key={i}>
 								<Link
 									key={to}
 									to={to}
@@ -29,21 +28,12 @@ const Header = () => {
 								>
 									{text}
 								</Link>
-							</Button>
 						))}
-					</nav> */}
+					</nav>
 					<div className="flex items-center">
-						<Button
-							size="icon"
-							aria-label="Toggle theme"
-							variant="ghost"
-							className="mr-6"
-						>
-							<Sun className="w-6 h-6 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-							<Moon className="absolute w-6 h-6 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
-							<span className="sr-only">toggle theme</span>
-						</Button>
-						<ProfileButton />
+						<Sun className="w-6 h-6 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
+						<Moon className="absolute w-6 h-6 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+						<span className="sr-only">toggle theme</span>
 					</div>
 				</div>
 			</Container>
