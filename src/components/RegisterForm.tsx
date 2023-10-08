@@ -11,13 +11,17 @@ const RegisterForm = () => {
 	const [password, setPassword] = useState("");
 	const [loading, setLoading] = useState(false);
 	const [message, setMessage] = useState<Message>({ type: null, text: null });
+	const [user, setUser] = useState(null);
+	const [session, setSession] = useState(false);
 
 	const handleRegister = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		setLoading(true);
 		setMessage(null);
 
-		const { user, error } = await supabase.auth.signUp({ email, password });
+		const { data, error } = await supabase.auth.signUp({ email, password });
+		const { user, session } = data;
+		console.log(user, session)
 		setLoading(false);
 
 		if (error) {
