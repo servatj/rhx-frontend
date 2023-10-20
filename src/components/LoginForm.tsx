@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { supabase } from "../utils/supabaseClient";
+import { useAuth } from "../context/AuthProvider";
+import { useNavigate } from "react-router-dom";
 
 interface Message {
   type: "error" | "success" | null;
@@ -11,26 +13,32 @@ const LoginForm = () => {
 	const [password, setPassword] = useState("");
 	const [loading, setLoading] = useState(false);
 	const [message, setMessage] = useState<Message>({ type: null, text: null });
-  const [auth, setAuth] = useState(false);
-  const [user, setUser] = useState(null);
+	const {login} = useAuth();
+   
+	const navigate = useNavigate();
 
 	const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		setLoading(true);
-		setMessage(null);
 
-		const { data, error } = await supabase.auth.signInWithPassword({
+		const response = await login(
 			email,
 			password,
-		});
+		);
+
+		console.log(response)
+
+		const { data, error } = response;
+
     const { user, session } = data;
-    console.log(error, data)
+    console.log(data)
 		setLoading(false);
 
 		if (error) {
 			setMessage({ type: "error", text: error.message });
 		} else if (user) {
 			setMessage({ type: "success", text: "Successfully logged in!" });
+
 		}
 	};
 
@@ -38,8 +46,7 @@ const LoginForm = () => {
   useEffect(() => {
     const { data } = supabase.auth.onAuthStateChange((event, session) => {
       if (event === "SIGNED_IN") {
-        setUser(session.user);
-        setAuth(true);
+				navigate("/profile");
       }
     });
     return () => {

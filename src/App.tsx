@@ -3,6 +3,8 @@ import Home from "./pages/Home";
 import CoverLetter from "./pages/CoverLetter";
 import Login from './pages/Login';
 import Register from './pages/Register';
+import Profile from './pages/Profile';
+import NotFound from "./pages/NotFound";
 
 
 function App(): JSX.Element {
@@ -12,6 +14,8 @@ function App(): JSX.Element {
 			<Route path="/cover" element={<CoverLetter />} />
 			<Route path="/login" element={<Login />} />
 			<Route path="/register" element={<Register />} />
+			<Route path="/profile" element={<Profile />} />
+			<Route path="*" element={<NotFound />} />
 		</Routes>
 	);
 }
