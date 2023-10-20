@@ -15,7 +15,7 @@ const passwordReset = (email: string) =>
     redirectTo: "http://localhost:5173/update-password"
   });
 
-const AuthProvider = ({ children }) => {
+const AuthProvider = ({ children }: any) => {
   const [auth, setAuth] = useState(false);
   const [user, setUser] = useState(null);
 
@@ -24,7 +24,7 @@ const AuthProvider = ({ children }) => {
       if (event == "PASSWORD_RECOVERY") {
         setAuth(false);
       } else if (event === "SIGNED_IN") {
-        setUser(session.user);
+        setUser(session?.user);
         setAuth(true);
       } else if (event === "SIGNED_OUT") {
         setAuth(false);

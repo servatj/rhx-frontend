@@ -1,4 +1,3 @@
-import Auth from "./Auth";
 import Account from "./Account";
 
 const Hero = ({ session }) => {
@@ -20,11 +19,6 @@ const Hero = ({ session }) => {
 					</span>
 					, Fast, easy, and intuitive.
 				</h3>
-				{!session ? (
-					<Auth />
-				) : (
-					<Account key={session.user.id} session={session} />
-				)}
 			</div>
 		</div>
 	);
