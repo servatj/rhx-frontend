@@ -3,11 +3,11 @@ import { BeakerIcon, AcademicCapIcon, PrinterIcon, UserPlusIcon, WrenchScrewdriv
 const Features = () => {
   return (
     <section className="">
-    <h2 className="text-2xl font-semibold mb-6 text-center">
-      Top features of Levely career AI
+    <h2 className="text-2xl font-semibold mb-6 text-left">
+      What you want to do today?
     </h2>
     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-      <div className="border p-6 rounded-lg shadow-lg">
+      <div className="border p-6 rounded-lg shadow-lg bg-white">
         <div className="flex items-center justify-center mb-4">
           <PrinterIcon className="h-6 w-6 text-pink-500"/>
         </div>
@@ -16,7 +16,7 @@ const Features = () => {
         </div>
         <p>Answer few questions or provide your cv, It can even adapt the tone and style based on the company's culture</p>
       </div>
-      <div className="border p-6 rounded-lg shadow-lg">
+      <div className="border p-6 rounded-lg shadow-lg bg-white">
         <div className="flex items-center justify-center mb-4">
           <AcademicCapIcon className="h-6 w-6 text-slate-600"/>
         </div>
@@ -25,7 +25,7 @@ const Features = () => {
         </div>
         <p>Let us enhance your cv with top</p>
       </div>
-      <div className="border p-6 rounded-lg shadow-lg">
+      <div className="border p-6 rounded-lg shadow-lg bg-white">
         <div className="flex items-center justify-center mb-4">
           <WrenchScrewdriverIcon className="h-6 w-6 text-black"/>
         </div>
@@ -34,11 +34,11 @@ const Features = () => {
         </div>
         <p>We care about your personal brand</p>
       </div>
-      <div className="border p-6 rounded-lg shadow-lg">
+      <div className="border p-6 rounded-lg shadow-lg bg-white">
         <div className="flex items-center justify-center mb-4">
            <BeakerIcon className="h-6 w-6 text-yellow-500"/>
         </div>
-        <div className="flex items-center justify-center mb-4">
+        <div className="flex items-center justify-center mb-4 ">
           <h3 className="text-1xl md:text-2xl md:leading-tight font-bold text-transparent bg-clip-text bg-gradient-to-br text-slate-500 justify-center"> Interview Simulator </h3>
         </div>
         <p>An AI-driven chatbot or virtual interviewer that conducts mock interviews with users.</p>
