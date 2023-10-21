@@ -3,8 +3,8 @@ import { BeakerIcon, AcademicCapIcon, PrinterIcon, UserPlusIcon, WrenchScrewdriv
 const Features = () => {
   return (
     <section className="">
-    <h2 className="text-2xl font-semibold mb-6 text-center">
-      Top features of Levely career AI
+    <h2 className="text-4xl font-semibold mb-6 text-center">
+      Top levely features 
     </h2>
     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
       <div className="border p-6 rounded-lg shadow-lg">
@@ -12,7 +12,7 @@ const Features = () => {
           <PrinterIcon className="h-6 w-6 text-pink-500"/>
         </div>
         <div className="flex items-center justify-center mb-4">
-          <h3 className="text-1xl md:text-2xl md:leading-tight font-bold text-transparent bg-clip-text bg-gradient-to-br text-slate-500 justify-center"> Create a perfect cover letter </h3>
+          <h3 className="text-1xl md:text-2xl md:leading-tight font-bold bg-clip-text bg-gradient-to-br text-slate-500 justify-center"> Create a perfect cover letter </h3>
         </div>
         <p>Answer few questions or provide your cv, It can even adapt the tone and style based on the company's culture</p>
       </div>
@@ -21,7 +21,7 @@ const Features = () => {
           <AcademicCapIcon className="h-6 w-6 text-slate-600"/>
         </div>
         <div className="flex items-center justify-center mb-4">
-          <h3 className="text-1xl md:text-2xl md:leading-tight font-bold text-transparent bg-clip-text bg-gradient-to-br text-slate-500 justify-center"> CV Enhancer </h3>
+          <h3 className="text-1xl md:text-2xl md:leading-tight font-bold bg-clip-text bg-gradient-to-br text-slate-500 justify-center"> CV Enhancer </h3>
         </div>
         <p>Let us enhance your cv with top</p>
       </div>
@@ -30,7 +30,7 @@ const Features = () => {
           <WrenchScrewdriverIcon className="h-6 w-6 text-black"/>
         </div>
         <div className="flex items-center justify-center mb-4">
-          <h3 className="text-1xl md:text-2xl md:leading-tight font-bold text-transparent bg-clip-text bg-gradient-to-br text-slate-500 justify-center"> AI generate portfolio picture </h3>
+          <h3 className="text-1xl md:text-2xl md:leading-tight font-bold bg-clip-text bg-gradient-to-br text-slate-500 justify-center"> AI generate portfolio picture </h3>
         </div>
         <p>We care about your personal brand</p>
       </div>
@@ -39,7 +39,7 @@ const Features = () => {
            <BeakerIcon className="h-6 w-6 text-yellow-500"/>
         </div>
         <div className="flex items-center justify-center mb-4">
-          <h3 className="text-1xl md:text-2xl md:leading-tight font-bold text-transparent bg-clip-text bg-gradient-to-br text-slate-500 justify-center"> Interview Simulator </h3>
+          <h3 className="text-1xl md:text-2xl md:leading-tight font-bold bg-clip-text bg-gradient-to-br text-slate-500 justify-center"> Interview Simulator </h3>
         </div>
         <p>An AI-driven chatbot or virtual interviewer that conducts mock interviews with users.</p>
       </div>
@@ -48,7 +48,7 @@ const Features = () => {
           <UserPlusIcon className="h-6 w-6 text-purple-500"/>
         </div>
         <div className="flex items-center justify-center mb-4">
-          <h3 className="text-1xl md:text-2xl md:leading-tight font-bold text-transparent bg-clip-text bg-gradient-to-br text-slate-500 justify-center"> Skill Gap Analysis </h3>
+          <h3 className="text-1xl md:text-2xl md:leading-tight font-bold bg-clip-text text-slate-500 justify-center"> Skill Gap Analysis </h3>
         </div>
         <p>Helping candidates improve their chances of landing their desired job</p>
       </div>
@@ -56,7 +56,9 @@ const Features = () => {
         <div className="flex items-center justify-center mb-4">
           <AdjustmentsVerticalIcon className="h-6 w-6 text-pink-500"/>
         </div>
-        <h3 className="font-semibold mb-4">AI-Powered Job Matching</h3>
+        <div className="flex items-center justify-center mb-4">
+          <h3 className="text-1xl md:text-2xl md:leading-tight font-bold bg-clip-text text-slate-500 justify-center"> AI Powered job matching </h3>
+        </div>
         <p>It matches candidates to positions they are most suited for</p>
       </div>
     </div>
