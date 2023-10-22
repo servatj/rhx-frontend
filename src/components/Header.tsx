@@ -14,6 +14,7 @@ const Header = () => {
 		{ to: "/login", text: "Login", visible: !user },
 		{ to: "/register", text: "Register", visible: !user },
 		{ to: "/profile", text: "Profile", visible: user },
+		{ to: "/pricing", text: "Pricing", visible: true },
 	];
 
 	const handleSignout = () => {

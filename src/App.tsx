@@ -5,6 +5,7 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import Profile from './pages/Profile';
 import NotFound from "./pages/NotFound";
+import PricingPage from "./pages/PricingPage";
 
 
 function App(): JSX.Element {
@@ -15,6 +16,7 @@ function App(): JSX.Element {
 			<Route path="/login" element={<Login />} />
 			<Route path="/register" element={<Register />} />
 			<Route path="/profile" element={<Profile />} />
+			<Route path="/pricing" element={<PricingPage />} />
 			<Route path="*" element={<NotFound />} />
 		</Routes>
 	);

@@ -1,18 +1,17 @@
 import Container from "../components/Container";
-import FeaturesProfile from "../components/FeaturesProfile";
+import Pricing from "../components/Princing";
 import Layout from "../components/Layout";
 
-const ProfilePage: React.FC = () => {
+const PricingPage: React.FC = () => {
   return (
     <Layout>
-      <h1>Welcome Back 👋</h1>
       <Container className="bg-slate-700">
         <div className={`flex m-8 justify-center items-center `}>
-					<FeaturesProfile />
+					<Pricing />
 				</div>
       </Container>
     </Layout>
   );
 }
 
-export default ProfilePage;
+export default PricingPage;
