@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import Container from "./ui/Container";
-import { Sun, Moon } from "lucide-react";
 import { useAuth } from "../context/AuthProvider";
 import { useNavigate } from "react-router-dom";
 
@@ -31,7 +30,7 @@ const Header = () => {
 							<h1 className="text-2xl font-bold text-white">Levely </h1>
 						</Link>
 					</div>
-					<nav className="mx-6 flex items-center md:block space-x-4 lg:space-x-6 hidden">
+					<nav className="mx-6 flex items-center md:block space-x-4 lg:space-x-6">
 						{links.map(({ to, text, visible }) => (
 							visible && (
 								<Link
