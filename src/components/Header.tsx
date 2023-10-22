@@ -10,7 +10,7 @@ const Header = () => {
 
 	const links = [
 		{ to: "/", text: "Home", visible: true },
-		{ to: "/cover", text: "Cover Letter", visible: user },
+		{ to: "/cover", text: "Cover Letter", visible: false },
 		{ to: "/login", text: "Login", visible: !user },
 		{ to: "/register", text: "Register", visible: !user },
 		{ to: "/profile", text: "Profile", visible: user },

@@ -1,4 +1,5 @@
 import { BeakerIcon, AcademicCapIcon, PrinterIcon, UserPlusIcon, WrenchScrewdriverIcon, AdjustmentsVerticalIcon  } from '@heroicons/react/24/solid'
+import { Link } from "react-router-dom";
 
 const Features = () => {
   return (
@@ -7,16 +8,18 @@ const Features = () => {
       What you want to do today?
     </h2>
     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-      <div className="border p-6 rounded-lg shadow-lg bg-white">
-        <div className="flex items-center justify-center mb-4">
-          <PrinterIcon className="h-6 w-6 text-pink-500"/>
+      <Link to='/cover'>
+        <div className="border p-6 rounded-lg shadow-lg bg-white transform transition-transform hover:scale-110">
+          <div className="flex items-center justify-center mb-4">
+            <PrinterIcon className="h-6 w-6 text-pink-500"/>
+          </div>
+          <div className="flex items-center justify-center mb-4">
+            <h3 className="text-1xl md:text-2xl md:leading-tight font-bold bg-clip-text bg-gradient-to-br text-slate-500 justify-center"> Create a perfect cover letter </h3>
+          </div>
+          <p>Answer few questions or provide your cv, It can even adapt the tone and style based on the company's culture</p>
         </div>
-        <div className="flex items-center justify-center mb-4">
-          <h3 className="text-1xl md:text-2xl md:leading-tight font-bold bg-clip-text bg-gradient-to-br text-slate-500 justify-center"> Create a perfect cover letter </h3>
-        </div>
-        <p>Answer few questions or provide your cv, It can even adapt the tone and style based on the company's culture</p>
-      </div>
-      <div className="border p-6 rounded-lg shadow-lg bg-white">
+      </Link>
+      <div className="border p-6 rounded-lg shadow-lg bg-white transform transition-transform hover:scale-110">
         <div className="flex items-center justify-center mb-4">
           <AcademicCapIcon className="h-6 w-6 text-slate-600"/>
         </div>
@@ -25,7 +28,7 @@ const Features = () => {
         </div>
         <p>Let us enhance your cv with top</p>
       </div>
-      <div className="border p-6 rounded-lg shadow-lg bg-white">
+      <div className="border p-6 rounded-lg shadow-lg bg-white transform transition-transform hover:scale-110">
         <div className="flex items-center justify-center mb-4">
           <WrenchScrewdriverIcon className="h-6 w-6 text-black"/>
         </div>
@@ -34,7 +37,7 @@ const Features = () => {
         </div>
         <p>We care about your personal brand</p>
       </div>
-      <div className="border p-6 rounded-lg shadow-lg bg-white">
+      <div className="border p-6 rounded-lg shadow-lg bg-white transform transition-transform hover:scale-110">
         <div className="flex items-center justify-center mb-4">
            <BeakerIcon className="h-6 w-6 text-yellow-500"/>
         </div>
@@ -43,7 +46,7 @@ const Features = () => {
         </div>
         <p>An AI-driven chatbot or virtual interviewer that conducts mock interviews with users.</p>
       </div>
-      <div className="border p-6 rounded-lg shadow-lg bg-white">
+      <div className="border p-6 rounded-lg shadow-lg bg-white transform transition-transform hover:scale-110">
         <div className="flex items-center justify-center mb-4">
           <UserPlusIcon className="h-6 w-6 text-purple-500"/>
         </div>
@@ -52,7 +55,7 @@ const Features = () => {
         </div>
         <p>Helping candidates improve their chances of landing their desired job</p>
       </div>
-      <div className="border p-6 rounded-lg shadow-lg bg-white">
+      <div className="border p-6 rounded-lg shadow-lg bg-white transform transition-transform hover:scale-110">
         <div className="flex items-center justify-center mb-4">
           <AdjustmentsVerticalIcon className="h-6 w-6 text-pink-500"/>
         </div>
