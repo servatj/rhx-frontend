@@ -7,6 +7,8 @@ import Profile from './pages/Profile';
 import NotFound from "./pages/NotFound";
 import PricingPage from "./pages/PricingPage";
 
+import "@fortawesome/fontawesome-free/css/all.min.css";
+import "./assets/styles/tailwind.css";
 
 function App(): JSX.Element {
 	return (

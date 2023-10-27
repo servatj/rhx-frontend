@@ -105,7 +105,7 @@ const LoginForm = () => {
 					<button
 						type="submit"
 						disabled={loading}
-						className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+						className="group ml-1 text-white font-bold px-6 py-4 justify-center rounded outline-none focus:outline-none mr-1 mb-1 bg-blueGray-700 active:bg-blueGray-600 uppercase text-sm shadow hover:shadow-lg ease-linear transition-all duration-150"
 					>
 						{loading ? "Signing in..." : "Sign in"}
 					</button>

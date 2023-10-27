@@ -19,7 +19,7 @@ const ProfilePage: React.FC = () => {
   return (
     <Layout>
       {isVisible && <h1 className="transition-opacity duration-500 pl-2">Welcome Back 👋</h1>}
-      <Container className="bg-slate-700">
+      <Container className="bg-blueGray-700">
         <div className={`flex m-8 justify-center items-center `}>
 					<FeaturesProfile />
 				</div>

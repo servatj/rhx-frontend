@@ -6,7 +6,7 @@ export default function Login() {
 	return (
 		<div className="App min-w-[600px]">
 			<Layout>
-				<Container className="bg-slate-700 h-2">
+				<Container className="bg-blueGray-700 h-2">
           <div className="flex p-10 justify-center">
              <LoginForm />            
           </div>

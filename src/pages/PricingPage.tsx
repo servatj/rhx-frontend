@@ -5,7 +5,7 @@ import Layout from "../components/Layout";
 const PricingPage: React.FC = () => {
   return (
     <Layout>
-      <Container className="bg-slate-700">
+      <Container className="bg-blueGray-700">
         <div className={`flex m-8 justify-center items-center `}>
 					<Pricing />
 				</div>

@@ -1,69 +1,107 @@
-import { BeakerIcon, AcademicCapIcon, PrinterIcon, UserPlusIcon, WrenchScrewdriverIcon, AdjustmentsVerticalIcon  } from '@heroicons/react/24/solid'
+import { Link } from "react-router-dom";
 
 const Features = () => {
-  return (
-    <section className="">
-    <h2 className="text-4xl font-semibold mb-6 text-center">
-      Top levely features 
-    </h2>
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-      <div className="border p-6 rounded-lg shadow-lg">
-        <div className="flex items-center justify-center mb-4">
-          <PrinterIcon className="h-6 w-6 text-pink-500"/>
-        </div>
-        <div className="flex items-center justify-center mb-4">
-          <h3 className="text-1xl md:text-2xl md:leading-tight font-bold bg-clip-text bg-gradient-to-br text-slate-500 justify-center"> Create a perfect cover letter </h3>
-        </div>
-        <p>Answer few questions or provide your cv, It can even adapt the tone and style based on the company's culture</p>
-      </div>
-      <div className="border p-6 rounded-lg shadow-lg">
-        <div className="flex items-center justify-center mb-4">
-          <AcademicCapIcon className="h-6 w-6 text-slate-600"/>
-        </div>
-        <div className="flex items-center justify-center mb-4">
-          <h3 className="text-1xl md:text-2xl md:leading-tight font-bold bg-clip-text bg-gradient-to-br text-slate-500 justify-center"> CV Enhancer </h3>
-        </div>
-        <p>Let us enhance your cv with top</p>
-      </div>
-      <div className="border p-6 rounded-lg shadow-lg">
-        <div className="flex items-center justify-center mb-4">
-          <WrenchScrewdriverIcon className="h-6 w-6 text-black"/>
-        </div>
-        <div className="flex items-center justify-center mb-4">
-          <h3 className="text-1xl md:text-2xl md:leading-tight font-bold bg-clip-text bg-gradient-to-br text-slate-500 justify-center"> AI generate portfolio picture </h3>
-        </div>
-        <p>We care about your personal brand</p>
-      </div>
-      <div className="border p-6 rounded-lg shadow-lg">
-        <div className="flex items-center justify-center mb-4">
-           <BeakerIcon className="h-6 w-6 text-yellow-500"/>
-        </div>
-        <div className="flex items-center justify-center mb-4">
-          <h3 className="text-1xl md:text-2xl md:leading-tight font-bold bg-clip-text bg-gradient-to-br text-slate-500 justify-center"> Interview Simulator </h3>
-        </div>
-        <p>An AI-driven chatbot or virtual interviewer that conducts mock interviews with users.</p>
-      </div>
-      <div className="border p-6 rounded-lg shadow-lg">
-        <div className="flex items-center justify-center mb-4">
-          <UserPlusIcon className="h-6 w-6 text-purple-500"/>
-        </div>
-        <div className="flex items-center justify-center mb-4">
-          <h3 className="text-1xl md:text-2xl md:leading-tight font-bold bg-clip-text text-slate-500 justify-center"> Skill Gap Analysis </h3>
-        </div>
-        <p>Helping candidates improve their chances of landing their desired job</p>
-      </div>
-      <div className="border p-6 rounded-lg shadow-lg">
-        <div className="flex items-center justify-center mb-4">
-          <AdjustmentsVerticalIcon className="h-6 w-6 text-pink-500"/>
-        </div>
-        <div className="flex items-center justify-center mb-4">
-          <h3 className="text-1xl md:text-2xl md:leading-tight font-bold bg-clip-text text-slate-500 justify-center"> AI Powered job matching </h3>
-        </div>
-        <p>It matches candidates to positions they are most suited for</p>
-      </div>
-    </div>
-  </section>
-  )
-}
+	return (
+		<section className="pb-20 bg-blueGray-200 -mt-20">
+			<div className="container mx-auto px-4">
+				<div className="flex flex-wrap">
+					<div className="lg:pt-12 pt-6 w-full md:w-4/12 px-4 text-center">
+						<div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-8 shadow-lg rounded-lg">
+							<div className="px-4 py-5 flex-auto">
+								<div className="text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 mb-5 shadow-lg rounded-full bg-red-400">
+									<i className="fas fa-award"></i>
+								</div>
+								<h6 className="text-xl font-semibold">AI Cover Letter</h6>
+								<p className="mt-2 mb-4 text-blueGray-500">
+                  Create a cover letter with our AI and get the job you want.
+                  High quality cover letters in minutes.
+								</p>
+							</div>
+						</div>
+					</div>
+
+					<div className="w-full md:w-4/12 px-4 text-center">
+						<div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-8 shadow-lg rounded-lg">
+							<div className="px-4 py-5 flex-auto">
+								<div className="text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 mb-5 shadow-lg rounded-full bg-lightBlue-400">
+									<i className="fas fa-retweet"></i>
+								</div>
+								<h6 className="text-xl font-semibold">CV Enhancer</h6>
+								<p className="mt-2 mb-4 text-blueGray-500">
+                  Increase your odds of getting hired with our CV enhancer.
+                  Get a perfect CV in minutes.
+								</p>
+							</div>
+						</div>
+					</div>
+
+					<div className="pt-6 w-full md:w-4/12 px-4 text-center">
+						<div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-8 shadow-lg rounded-lg">
+							<div className="px-4 py-5 flex-auto">
+								<div className="text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 mb-5 shadow-lg rounded-full bg-emerald-400">
+									<i className="fas fa-fingerprint"></i>
+								</div>
+								<h6 className="text-xl font-semibold">Profile Generated Picture</h6>
+								<p className="mt-2 mb-4 text-blueGray-500">
+                  Get a perfect profile picture for your CV and LinkedIn.
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div className="flex flex-wrap items-center mt-32">
+					<div className="w-full md:w-5/12 px-4 mr-auto ml-auto">
+						<div className="text-blueGray-500 p-3 text-center inline-flex items-center justify-center w-16 h-16 mb-6 shadow-lg rounded-full bg-white">
+							<i className="fas fa-user-friends text-xl"></i>
+						</div>
+						<h3 className="text-3xl mb-2 font-semibold leading-normal">
+						  More features are coming soon!
+						</h3>
+						<p className="text-lg font-light leading-relaxed mt-4 mb-4 text-blueGray-600">
+							Our mission is to help you get the job you want. We are working
+              hard to make create tools that will help you not just to get a job now but
+              help you with your career path.
+						</p>
+						<p className="text-lg font-light leading-relaxed mt-0 mb-4 text-blueGray-600">
+							We are really excited to share with you our new features. Stay tuned!
+						</p>
+            <input type="email" placeholder="Enter your email" className="border-2 border-gray-300 rounded-lg p-2 w-full" />
+            <button className="github-star ml-1 text-white font-bold px-6 py-4 rounded outline-none focus:outline-none mr-1 mb-1 bg-blueGray-700 active:bg-blueGray-600 uppercase text-sm shadow hover:shadow-lg ease-linear transition-all duration-150 mt-4">Notify me</button>
+					</div>
+
+					<div className="w-full md:w-4/12 px-4 mr-auto ml-auto">
+						<div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded-lg bg-lightBlue-500">
+							<img
+								alt="..."
+								src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1051&q=80"
+								className="w-full align-middle rounded-t-lg"
+							/>
+							<blockquote className="relative p-8 mb-4">
+								<svg
+									preserveAspectRatio="none"
+									xmlns="http://www.w3.org/2000/svg"
+									viewBox="0 0 583 95"
+									className="absolute left-0 w-full block h-95-px -top-94-px"
+								>
+									<polygon
+										points="-30,95 583,95 583,65"
+										className="text-lightBlue-500 fill-current"
+									></polygon>
+								</svg>
+								<h4 className="text-xl font-bold text-white">
+									Top Notch Cover Letter
+								</h4>
+								<p className="text-md font-light mt-2 text-white">
+                  "Thanks to levely I have all the tools needed to boost my career"
+								</p>
+							</blockquote>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	);
+};
 
 export default Features;

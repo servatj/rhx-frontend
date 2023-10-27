@@ -1,7 +1,7 @@
 import { supabase } from "../utils/supabaseClient";
 import { useState, useEffect } from "react";
 import Hero from "../components/Hero";
-import Container from "../components/Container";
+import { Link } from "react-router-dom";
 import Layout from "../components/Layout";
 import Features from "../components/Features";
 
@@ -43,9 +43,13 @@ export default function Home() {
 	}, []);
 
 	return (
-		<div className="App min-w-[600px]">
+		<div className="App min-h-[600px]">
 			<Layout>
-				<Container className="bg-slate-700">
+				<main>
+					<Hero />
+          <Features />
+				</main>
+				{/* <Container className="bg-slate-700">
 					<Hero />
 				</Container>
 				<div className={`flex m-8 justify-center items-center `}>
@@ -57,7 +61,7 @@ export default function Home() {
 						time="2 hours ago"
 						commentText="Thanks to rhx I have all the tools needed to boost my career"
 					/>
-				</Container>
+				</Container> */}
 			</Layout>
 		</div>
 	);

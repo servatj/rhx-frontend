@@ -6,7 +6,7 @@ import Layout from "../components/Layout";
 const NotFound: React.FC = () => {
 	return (
 		<Layout>
-			<Container className="bg-slate-700">
+			<Container className="bg-blueGray-700">
 				<div className="flex flex-col items-center justify-center h-screen bg-gray-200">
 					<img
 						src={"/notfound.png"}

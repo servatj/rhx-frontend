@@ -1,5 +1,8 @@
 import { useState } from "react";
 import { createClient } from "@supabase/supabase-js";
+import ReactMarkdown from "react-markdown";
+import gfm from "remark-gfm";
+import rehype from "rehype-raw";
 
 const supabase = createClient(
 	"https://fcglhscwklxxhveqgaef.supabase.co",
@@ -10,8 +13,8 @@ const CoverLetterForm = () => {
 	const [stage, setStage] = useState(1);
 	const [coverLetter, setCoverLetter] = useState("");
 	const [isCoverLetterLoading, setIsCoverLetterLoading] = useState(true);
-	const [isCoverLetterLoaded, setIsCoverLetterLoaded] = useState(false);
 	const [isFormSubmitted, setIsFormSubmitted] = useState(false);
+	const [errors, setErrors] = useState({});
 	const [formData, setFormData] = useState({
 		name: "",
 		address: "",
@@ -25,11 +28,13 @@ const CoverLetterForm = () => {
 	const [submissionStatus, setSubmissionStatus] = useState("none");
 
 	const handleSubmit = async () => {
+		if (!validate()) return;
+		
 		console.log("Submitting form data...");
 		setIsCoverLetterLoading(true);
 		setIsFormSubmitted(true);
 		try {
-			const response = await fetch("https://api.levely.pro/api/cover-letter", {
+			const response = await fetch("https://localhost:5001/api/cover-letter", {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",
@@ -38,25 +43,42 @@ const CoverLetterForm = () => {
 					name: formData.name,
 				}),
 			});
-	
+
 			if (!response.ok) {
 				throw new Error(`HTTP error! Status: ${response.status}`);
 			}
-	
+
 			const responseData = await response.json();
 			setCoverLetter(responseData.message);
 			if (response && response.ok) {
 				console.log("Form data submitted successfully");
-				setIsCoverLetterLoaded(true);
 				setIsCoverLetterLoading(false);
 				setSubmissionStatus("success");
 			} else {
 				console.error("Failed to submit form data", response?.statusText);
 				setSubmissionStatus("failure");
 			}
-		} catch	(error) {
+		} catch (error) {
 			console.error(error);
 		}
+	};
+
+	
+
+	const validate = () => {
+		const newErrors = {};
+
+		if (!formData.name) newErrors.name = "Name is required";
+		if (!formData.address) newErrors.address = "Address is required";
+		if (!formData.phone) newErrors.phone = "Phone is required";
+		if (!formData.email) newErrors.email = "Email is required";
+		if (!formData.linkedin) newErrors.linkedin = "Linkedin is required";
+		if (!formData.strongPoints)
+			newErrors.strongPoints = "Strong Points is required";
+		if (!formData.pasteCV) newErrors.pasteCV = "CV is required";
+
+		setErrors(newErrors);
+		return Object.keys(newErrors).length === 0; // returns true if no errors
 	};
 
 	const handleInputChange = (e) => {
@@ -69,37 +91,33 @@ const CoverLetterForm = () => {
 	const nextStage = () => setStage(stage + 1);
 	const prevStage = () => setStage(stage - 1);
 
-	// form is loading 
-	// form has notBeen Sumitted
-	// form has been submitted
+	const CoverLetter = ({ text }) => {
+		return <div style={{ whiteSpace: "pre-line" }}>{text}</div>;
+	};
 
-  const renderCoverLetter = () => {
+	const renderCoverLetter = () => {
 		return isCoverLetterLoading ? (
 			<div className="w-16 h-16 border-t-4 border-blue-500 border-solid rounded-full animate-spin"></div>
-		):(
+		) : (
 			<div className="container mx-auto bg-white p-5 rounded shadow">
-			<h2 className="text-1xl font-bold mb-4 text-black">
-				{" "}
-				Cover Letter{" "}
-			</h2>
-			<p className="text-black">
-				{coverLetter}
-			</p>
-		
-			<button
-				onClick={prevStage}
-				className="bg-gray-500 text-white px-4 py-2 rounded mr-2"
-			>
-				Back
-			</button>
-			<button
-				onClick={() => handleSubmit()}
-				className="bg-green-500 text-white mt-10 px-4 py-2 rounded"
-			>
-				Submit
-			</button>
-		</div>
-		)
+				<h2 className="text-1xl font-bold mb-4 text-black"> Cover Letter </h2>
+
+				<CoverLetter text={coverLetter} />
+
+				<button
+					onClick={prevStage}
+					className="bg-gray-500 text-white px-4 py-2 rounded mr-2"
+				>
+					Back
+				</button>
+				<button
+					onClick={() => handleSubmit()}
+					className="bg-green-500 text-white mt-10 px-4 py-2 rounded"
+				>
+					Re - Submit
+				</button>
+			</div>
+		);
 	};
 
 	return isFormSubmitted ? (
@@ -123,6 +141,7 @@ const CoverLetterForm = () => {
 						onChange={handleInputChange}
 						className="p-2 border rounded mb-4 w-full"
 					/>
+					{errors.name && <p className="text-red-500">{errors.name}</p>}
 					<label className="block mb-2 text-white">Address</label>
 					<input
 						type="text"
@@ -131,6 +150,7 @@ const CoverLetterForm = () => {
 						onChange={handleInputChange}
 						className="p-2 border rounded mb-4 w-full"
 					/>
+					{errors.address && <p className="text-red-500">{errors.address}</p>}
 					<label className="block mb-2 text-white">Phone</label>
 					<input
 						type="text"
@@ -139,6 +159,7 @@ const CoverLetterForm = () => {
 						onChange={handleInputChange}
 						className="p-2 border rounded mb-4 w-full"
 					/>
+					{errors.phone && <p className="text-red-500">{errors.phone}</p>}
 					<label className="block mb-2 text-white">Email</label>
 					<input
 						type="text"
@@ -147,6 +168,7 @@ const CoverLetterForm = () => {
 						onChange={handleInputChange}
 						className="p-2 border rounded mb-4 w-full"
 					/>
+					{errors.email && <p className="text-red-500">{errors.email}</p>}
 					<label className="block mb-2 text-white">Linkedin</label>
 					<input
 						type="text"
@@ -155,6 +177,7 @@ const CoverLetterForm = () => {
 						onChange={handleInputChange}
 						className="p-2 border rounded mb-4 w-full"
 					/>
+					{errors.name && <p className="text-red-500">{errors.name}</p>}
 					<button
 						onClick={nextStage}
 						className="bg-blue-500 text-white px-4 py-2 rounded"
