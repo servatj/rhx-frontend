@@ -74,7 +74,7 @@ const Features = () => {
 						<div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded-lg bg-lightBlue-500">
 							<img
 								alt="..."
-								src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1051&q=80"
+								src="https://plus.unsplash.com/premium_photo-1661662850226-83c981ed4eba?auto=format&fit=crop&q=80&w=3132&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
 								className="w-full align-middle rounded-t-lg"
 							/>
 							<blockquote className="relative p-8 mb-4">
