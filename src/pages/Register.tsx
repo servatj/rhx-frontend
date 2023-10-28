@@ -5,8 +5,10 @@ import RegisterForm from "../components/RegisterForm";
 export default function Register() {
 	return (
 			<Layout>
-				<Container className="bg-blueGray-700">
-					<RegisterForm />
+				<Container className="bg-blueGray-700 h-2">
+					<div className="flex p-10 justify-center">
+						<RegisterForm />
+					</div>
 				</Container>
 			</Layout>
 	);
