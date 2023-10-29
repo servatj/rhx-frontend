@@ -5,7 +5,7 @@ interface ContainerProps {
 
 const Container: React.FC<ContainerProps> = ({ children, className }) => {
   return (
-    <div className={`flex h-screen justify-center items-center ${className}`}>
+    <div className={`flex justify-center items-center ${className} min-h-screen`}>
       {children}
     </div>
   );

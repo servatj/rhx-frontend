@@ -1,14 +1,15 @@
-import CoverLetterForm from "../components/CoverLetterForm"
-import Header from "../components/Header";
+import CoverLetterForm from "../components/CoverLetterForm";
 import Container from "../components/Container";
+import Layout from "../components/Layout";
 
 export default function Home() {
 	return (
 		<>
-			<Header />
-			<Container className="bg-slate-700">
-				<CoverLetterForm />
-			</Container>
+			<Layout>
+				<Container className="bg-blueGray-700">
+					<CoverLetterForm />
+				</Container>
+			</Layout>
 		</>
 	);
 }

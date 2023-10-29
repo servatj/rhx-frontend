@@ -3,6 +3,7 @@ import { createClient } from "@supabase/supabase-js";
 import ReactMarkdown from "react-markdown";
 import gfm from "remark-gfm";
 import rehype from "rehype-raw";
+import documentation from "../assets/img/documentation.png";
 
 const supabase = createClient(
 	"https://fcglhscwklxxhveqgaef.supabase.co",
@@ -29,12 +30,12 @@ const CoverLetterForm = () => {
 
 	const handleSubmit = async () => {
 		if (!validate()) return;
-		
+
 		console.log("Submitting form data...");
 		setIsCoverLetterLoading(true);
 		setIsFormSubmitted(true);
 		try {
-			const response = await fetch("https://localhost:5001/api/cover-letter", {
+			const response = await fetch("https://api.levely.pro/api/cover-letter", {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",
@@ -62,8 +63,6 @@ const CoverLetterForm = () => {
 			console.error(error);
 		}
 	};
-
-	
 
 	const validate = () => {
 		const newErrors = {};
@@ -97,7 +96,20 @@ const CoverLetterForm = () => {
 
 	const renderCoverLetter = () => {
 		return isCoverLetterLoading ? (
-			<div className="w-16 h-16 border-t-4 border-blue-500 border-solid rounded-full animate-spin"></div>
+			<>
+				<div className="w-full md:w-6/12 px-4 pt-24 md:pt-0 lg:block">
+					<img
+						alt="..."
+						className="max-w-full rounded-lg shadow-xl"
+						style={{
+							transform:
+								"scale(1) perspective(1040px) rotateY(-11deg) rotateX(2deg) rotate(2deg)",
+						}}
+						src={documentation}
+					/>
+				</div>
+				<div className="w-16 h-16 border-t-4 border-blue-500 border-solid rounded-full animate-spin"></div>
+			</>
 		) : (
 			<div className="container mx-auto bg-white p-5 rounded shadow">
 				<h2 className="text-1xl font-bold mb-4 text-black"> Cover Letter </h2>
@@ -123,7 +135,7 @@ const CoverLetterForm = () => {
 	return isFormSubmitted ? (
 		renderCoverLetter()
 	) : (
-		<div className="container mx-auto bg-slate-900 p-8 rounded shadow">
+		<div className="container mx-auto bg-black p-8 rounded shadow">
 			<h1 className="text-2xl font-bold mb-4 text-white">
 				Create Cover Letter
 			</h1>
@@ -180,7 +192,7 @@ const CoverLetterForm = () => {
 					{errors.name && <p className="text-red-500">{errors.name}</p>}
 					<button
 						onClick={nextStage}
-						className="bg-blue-500 text-white px-4 py-2 rounded"
+						className="bg-blueGray-700 active:bg-blueGray-600 text-white px-4 py-2 rounded"
 					>
 						Next
 					</button>
@@ -206,13 +218,13 @@ const CoverLetterForm = () => {
 					/>
 					<button
 						onClick={prevStage}
-						className="bg-gray-500 text-white px-4 py-2 rounded mr-2"
+						className="bg-blueGray-700 active:bg-blueGray-600 text-white px-4 py-2 rounded mr-2"
 					>
 						Back
 					</button>
 					<button
 						onClick={nextStage}
-						className="bg-blue-500 text-white px-4 py-2 rounded"
+						className="bg-blueGray-700 active:bg-blueGray-600 text-white px-4 py-2 rounded"
 					>
 						Next
 					</button>
@@ -237,13 +249,13 @@ const CoverLetterForm = () => {
 					<p className="text-black">Paste CV: {formData.pasteCV}</p>
 					<button
 						onClick={prevStage}
-						className="bg-gray-500 text-white px-4 py-2 rounded mr-2"
+						className="bg-blueGray-700 active:bg-blueGray-600 text-white px-4 py-2 rounded mr-2"
 					>
 						Back
 					</button>
 					<button
 						onClick={() => handleSubmit()}
-						className="bg-green-500 text-white mt-10 px-4 py-2 rounded"
+						className="bg-blueGray-700 active:bg-blueGray-600 text-white mt-10 px-4 py-2 rounded"
 					>
 						Submit
 					</button>
