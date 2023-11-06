@@ -6,7 +6,7 @@ import Register from './pages/Register';
 import Profile from './pages/Profile';
 import NotFound from "./pages/NotFound";
 import PricingPage from "./pages/PricingPage";
-import TestCotainer from "./pages/testContainter";
+import TestCotainer from "./pages/TestContainter";
 
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "./assets/styles/tailwind.css";
