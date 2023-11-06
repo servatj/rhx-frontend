@@ -6,6 +6,7 @@ import Register from './pages/Register';
 import Profile from './pages/Profile';
 import NotFound from "./pages/NotFound";
 import PricingPage from "./pages/PricingPage";
+import TestCotainer from "./pages/testContainter";
 
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "./assets/styles/tailwind.css";
@@ -17,6 +18,7 @@ function App(): JSX.Element {
 			<Route path="/cover" element={<CoverLetter />} />
 			<Route path="/login" element={<Login />} />
 			<Route path="/register" element={<Register />} />
+			<Route path="/test" element={<TestCotainer />} />
 			<Route path="/profile" element={<Profile />} />
 			<Route path="/pricing" element={<PricingPage />} />
 			<Route path="*" element={<NotFound />} />

@@ -1,6 +1,29 @@
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import { supabase } from "../utils/supabaseClient";
+import { use } from "chai";
 
 const Features = () => {
+	const [email, setEmail] = useState("");
+	const [submitted, setSubmitted] = useState(false);
+
+	const handleEmailInputChange = (e) => {
+		setEmail(e.target.value);
+	};
+
+	const handleSubmit = async (e) => {
+		e.preventDefault();
+
+		const {error} = await supabase.from("subscribers").insert({ email });
+
+		if (error) {
+			console.error("There was an error inserting the email", error);
+		} else {
+			console.log("Email inserted");
+			setEmail("");
+			setSubmitted(true);
+		}
+	};
+
 	return (
 		<section className="pb-20 bg-blueGray-200 -mt-20">
 			<div className="container mx-auto px-4">
@@ -13,8 +36,8 @@ const Features = () => {
 								</div>
 								<h6 className="text-xl font-semibold">AI Cover Letter</h6>
 								<p className="mt-2 mb-4 text-blueGray-500">
-                  Create a cover letter with our AI and get the job you want.
-                  High quality cover letters in minutes.
+									Create a cover letter with our AI and get the job you want.
+									High quality cover letters in minutes.
 								</p>
 							</div>
 						</div>
@@ -28,8 +51,8 @@ const Features = () => {
 								</div>
 								<h6 className="text-xl font-semibold">CV Enhancer</h6>
 								<p className="mt-2 mb-4 text-blueGray-500">
-                  Increase your odds of getting hired with our CV enhancer.
-                  Get a perfect CV in minutes.
+									Increase your odds of getting hired with our CV enhancer. Get
+									a perfect CV in minutes.
 								</p>
 							</div>
 						</div>
@@ -41,9 +64,11 @@ const Features = () => {
 								<div className="text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 mb-5 shadow-lg rounded-full bg-emerald-400">
 									<i className="fas fa-fingerprint"></i>
 								</div>
-								<h6 className="text-xl font-semibold">Profile Generated Picture</h6>
+								<h6 className="text-xl font-semibold">
+									Profile Generated Picture
+								</h6>
 								<p className="mt-2 mb-4 text-blueGray-500">
-                  Get a perfect profile picture for your CV and LinkedIn.
+									Get a perfect profile picture for your CV and LinkedIn.
 								</p>
 							</div>
 						</div>
@@ -56,18 +81,37 @@ const Features = () => {
 							<i className="fas fa-user-friends text-xl"></i>
 						</div>
 						<h3 className="text-3xl mb-2 font-semibold leading-normal">
-						  More features are coming soon!
+							More features are coming soon!
 						</h3>
 						<p className="text-lg font-light leading-relaxed mt-4 mb-4 text-blueGray-600">
 							Our mission is to help you get the job you want. We are working
-              hard to make create tools that will help you not just to get a job now but
-              help you with your career path.
+							hard to make create tools that will help you not just to get a job
+							now but help you with your career path.
 						</p>
 						<p className="text-lg font-light leading-relaxed mt-0 mb-4 text-blueGray-600">
-							We are really excited to share with you our new features. Stay tuned!
+							We are really excited to share with you our new features. Stay
+							tuned!
 						</p>
-            <input type="email" placeholder="Enter your email" className="border-2 border-gray-300 rounded-lg p-2 w-full" />
-            <button className="github-star ml-1 text-white font-bold px-6 py-4 rounded outline-none focus:outline-none mr-1 mb-1 bg-blueGray-700 active:bg-blueGray-600 uppercase text-sm shadow hover:shadow-lg ease-linear transition-all duration-150 mt-4">Notify me</button>
+						{submitted ? (
+							<div className="text-lg font-light leading-relaxed mt-0 mb-4 text-blueGray-600">
+								Thank you for subscribing!
+							</div>
+						) : (
+							<>
+								<input
+									onChange={handleEmailInputChange}
+									type="email"
+									placeholder="Enter your email"
+									className="border-2 border-gray-300 rounded-lg p-2 w-full"
+								/>
+								<button
+									onClick={handleSubmit}
+									className="github-star ml-1 text-white font-bold px-6 py-4 rounded outline-none focus:outline-none mr-1 mb-1 bg-blueGray-700 active:bg-blueGray-600 uppercase text-sm shadow hover:shadow-lg ease-linear transition-all duration-150 mt-4"
+								>
+									Notify me
+								</button>
+							</>
+						)}
 					</div>
 
 					<div className="w-full md:w-4/12 px-4 mr-auto ml-auto">
@@ -93,7 +137,8 @@ const Features = () => {
 									Top Notch Cover Letter
 								</h4>
 								<p className="text-md font-light mt-2 text-white">
-                  "Thanks to levely I have all the tools needed to boost my career"
+									"Thanks to levely I have all the tools needed to boost my
+									career"
 								</p>
 							</blockquote>
 						</div>
