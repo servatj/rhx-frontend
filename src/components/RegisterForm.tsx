@@ -1,11 +1,103 @@
 import { useState } from "react";
 import { supabase } from "../utils/supabaseClient";
 import { Link } from "react-router-dom";
-
+import styled from "styled-components";
 interface Message {
 	type: "error" | "success" | null;
 	text: string | null;
 }
+
+const FormContainer = styled.div`
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	min-width: 0;
+	word-break: break-word;
+	width: 100%;
+	margin-bottom: 1.5rem;
+	box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+	border-radius: 0.5rem;
+	background-color: #000;
+	border: 0;
+`;
+
+const FormHeader = styled.div`
+	border-top-radius: 0.5rem;
+	padding: 1.5rem 3rem;
+`;
+
+const FormBody = styled.div`
+	max-width: 28rem;
+	width: 100%;
+	margin: 0 auto;
+	display: flex;
+	flex-direction: column;
+	gap: 2rem;
+`;
+
+const Alert = styled.div`
+	background-color: ${(props) =>
+		props.type === "error" ? "#F56565" : "#68D391"};
+	// ... More styles for your alert
+`;
+
+const StyledForm = styled.form`
+	margin-top: 2rem;
+	gap: 1.5rem;
+	display: flex;
+	flex-direction: column;
+`;
+
+const FormTitle = styled.div`
+	color: #a0aec0;
+	text-align: center;
+	margin-bottom: 0.75rem;
+	font-weight: bold;
+`;
+
+const InputGroup = styled.div`
+	border-radius: 0.375rem;
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+	// ... More styles for your input group
+`;
+
+const StyledInput = styled.input`
+	appearance: none;
+	display: block;
+	width: 100%;
+	padding: 0.5rem 0.75rem;
+	border: 1px solid #d2d6dc;
+	color: #4a5568;
+	border-radius: 0.375rem;
+	// ... More focus styles
+`;
+
+const Label = styled.label`
+	// ... Label styles
+`;
+
+const StyledLink = styled(Link)`
+	color: #a0aec0;
+`;
+
+const SubmitButton = styled.button`
+  text-white;
+  font-weight: bold;
+  padding: 0.75rem 1.5rem;
+  display: flex;
+  justify-content: center;
+  border-radius: 0.375rem;
+  background-color: #4a5568;
+  text-transform: uppercase;
+  font-size: 0.875rem;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
+  transition: all 0.15s ease-linear;
+  // ... More active and hover styles
+
+  &:disabled {
+    opacity: 0.5;
+  }
+`;
 
 const RegisterForm = () => {
 	const [email, setEmail] = useState("");
@@ -36,75 +128,47 @@ const RegisterForm = () => {
 	};
 
 	return (
-		<div className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-black border-0">
-			<div className="rounded-t mb-0 px-12 py-6">
-				<div className="max-w-md w-full space-y-8">
-					{message && (
-						<div
-							className={`alert ${
-								message.type === "error" ? "alert-error" : "alert-success"
-							}`}
-						>
-							{message.text}
-						</div>
-					)}
-					<form className="mt-8 space-y-6" onSubmit={handleRegister}>
-					  <div className="text-blueGray-400 text-center mb-3 font-bold">
+		<FormContainer>
+			<FormHeader>
+				<FormBody>
+					{message && <Alert type={message.type}>{message.text}</Alert>}
+					<StyledForm onSubmit={handleRegister}>
+						<FormTitle>
 							<small>Register new account</small>
-						</div>
+						</FormTitle>
 						<input type="hidden" name="remember" value="true" />
-						<div className="rounded-md shadow-sm -space-y-px">
-							<div>
-								<label htmlFor="email-address" className="">
-								  <h6 className="text-blueGray-500 font-bold">Email</h6>
-								</label>
-								<input
-									id="email-address"
-									name="email"
-									type="email"
-									autoComplete="email"
-									required
-									className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-									placeholder="Email address"
-									value={email}
-									onChange={(e) => setEmail(e.target.value)}
-								/>
-							</div>
-							<div>
-								<label htmlFor="password" className="">
-								<h6 className="text-blueGray-500 font-bold">Password </h6>
-								</label>
-								<input
-									id="password"
-									name="password"
-									type="password"
-									autoComplete="current-password"
-									required
-									className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-									placeholder="Password"
-									value={password}
-									onChange={(e) => setPassword(e.target.value)}
-								/>
-							</div>
-						</div>
-						<div className="flex justify-between">
-                <Link to="/login" className="text-blueGray-400">
-                  <small>Already have an account?</small>
-                </Link>
-						</div>
-						<div className="flex items-center justify-center pt-8">
-							<button
-								type="submit"
-								disabled={loading}
-								className="group ml-1 text-white font-bold px-6 py-4 justify-center rounded outline-none focus:outline-none mr-1 mb-1 bg-blueGray-700 active:bg-blueGray-600 uppercase text-sm shadow hover:shadow-lg ease-linear transition-all duration-150"
-							>
-								{loading ? "Registering..." : "Register"}
-							</button>
-						</div>
-					</form>
-				</div>
-			</div>
-		</div>
+						<InputGroup>
+							<Label htmlFor="email-address">
+								<h6>Email</h6>
+							</Label>
+							<StyledInput
+								id="email-address"
+								type="email"
+								required
+								placeholder="Email address"
+							/>
+						</InputGroup>
+						<InputGroup>
+							<Label htmlFor="password">
+								<h6>Password </h6>
+							</Label>
+							<StyledInput
+								id="password"
+								type="password"
+								required
+								placeholder="Password"
+							/>
+						</InputGroup>
+						<StyledLink to="/login">
+							<small>Already have an account?</small>
+						</StyledLink>
+						<SubmitButton type="submit" disabled={loading}>
+							{loading ? "Registering..." : "Register"}
+						</SubmitButton>
+					</StyledForm>
+				</FormBody>
+			</FormHeader>
+		</FormContainer>
 	);
 };
 

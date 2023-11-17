@@ -56,7 +56,7 @@ export default function Navbar(props) {
 							{links.map(
 								({ to, text, visible }) =>
 									visible && (
-										<li className="flex items-center">
+										<li key={to} className="flex items-center">
 											<Link
 												key={to}
 												to={to}

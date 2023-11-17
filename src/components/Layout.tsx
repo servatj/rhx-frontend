@@ -1,18 +1,19 @@
-import Footer from './Footer';
+import Footer from "./Footer";
 import Navbar from "./Navbars/AuthNavbar";
+import Header from "./Header"
 
 interface LayoutProps {
-  children: React.ReactNode;
+	children: React.ReactNode;
 }
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
-  return (
-    <>
-      <Navbar />
-        {children}
-      <Footer />
-    </>
-  );
-}
+	return (
+		<>
+			<Header/>
+			  <main>{children}</main>
+			<Footer />
+		</>
+	);
+};
 
 export default Layout;

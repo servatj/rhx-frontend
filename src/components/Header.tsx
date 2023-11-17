@@ -1,7 +1,74 @@
 import { Link } from "react-router-dom";
-import Container from "./ui/Container";
+import { useState } from "react";
 import { useAuth } from "../context/AuthProvider";
 import { useNavigate } from "react-router-dom";
+import styled from "styled-components";
+
+const HeaderContainer = styled.header`
+	background: black; // Or any other color you prefer
+	color: #fff;
+	display: flex;
+	justify-content: space-between;
+	padding: 1rem 2rem;
+	align-items: center;
+`;
+
+const Logo = styled.div`
+	font-size: 1.5rem;
+	font-weight: bold;
+`;
+
+const Nav = styled.nav`
+	@media (max-width: 768px) {
+		display: none;
+	}
+`;
+
+const NavList = styled.ul`
+	list-style: none;
+	display: flex;
+	gap: 2rem;
+`;
+
+const NavLink = styled.li`
+	cursor: pointer;
+
+	&:hover {
+		text-decoration: underline;
+	}
+`;
+
+const MobileMenuIcon = styled.button`
+	background: none;
+	border: none;
+	color: #fff;
+	display: none;
+
+	@media (max-width: 768px) {
+		display: block;
+	}
+`;
+
+const MobileNav = styled.div`
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 80%; // or 100% if you want full width
+  height: 100%;
+  background: #fff; // Background for the mobile menu
+  color: #000; // Text color for the mobile menu
+  transform: translateX(100%);
+  transition: transform 0.3s ease-in-out;
+
+  &.active {
+    transform: translateX(0);
+  }
+`;
+
+const MobileNavList = styled(NavList)`
+  flex-direction: column;
+  padding: 2rem;
+`;
 
 const Header = () => {
 	const navigate = useNavigate();
@@ -20,46 +87,70 @@ const Header = () => {
 	const handleSignout = () => {
 		signOut();
 		navigate("/");
-	}
+	};
+
+	const toggleMobileMenu = () => {
+		console.log('toggleMobileMenu');
+    setMobileMenuOpen(!isMobileMenuOpen);
+  };
+
+	const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
 
 	return (
-		<header className="sm:flex sm:justify-between py-3 px-4 border-b bg-slate-800">
-			<Container>
-				<div className="relative px-4 sm:px-6 lg:px-8 flex h-16 items-center justify-between w-full">
-					<div className="flex items-center">
-						<Link to="/" className="ml-4 lg:ml-0">
-							<h1 className="text-2xl font-bold text-white">Levely </h1>
-						</Link>
-					</div>
-					<nav className="mx-6 flex items-center md:block space-x-4 lg:space-x-6">
-						{links.map(({ to, text, visible }) => (
-							visible && (
-								<Link
-									key={to}
-									to={to}
-									className="text-base font-medium text-white hover:text-pink-400"
-								>
-									{text}
-								</Link>
-							)
-						))}
-						{user && (
-							<button
-								onClick={handleSignout}
-								className="text-base font-medium text-white hover:text-pink-400"
-							>
-								Logout
-							</button>
-						)}
-					</nav>
-					{/* <div className="flex items-center">
-						<Sun className="w-6 h-6 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-						<Moon className="absolute w-6 h-6 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
-						<span className="sr-only">toggle theme</span>
-					</div> */}
-				</div>
-			</Container>
-		</header>
+		<HeaderContainer>
+			<Logo>LEVELY</Logo>
+			<Nav>
+				<NavList>
+					{links.map(
+						({ to, text, visible }) =>
+							visible && <Link key={to} to={to}>{text}</Link>
+					)}
+					{user && (
+						<button
+							onClick={handleSignout}
+						>
+							Logout
+						</button>
+					)}
+				</NavList>
+			</Nav>
+			<MobileMenuIcon onClick={toggleMobileMenu}>
+				{/* Icon from https://heroicons.com/ */}
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					fill="none"
+					viewBox="0 0 24 24"
+					stroke="currentColor"
+					strokeWidth={2}
+					width="24"
+					height="24"
+				>
+					<path
+						strokeLinecap="round"
+						strokeLinejoin="round"
+						d="M4 6h16M4 12h16m-7 6h7"
+					/>
+				</svg>
+			</MobileMenuIcon>
+			<MobileNav className={isMobileMenuOpen ? 'active' : ''}>
+        <MobileNavList>
+				  {links.map(
+						({ to, text, visible }) =>
+						visible && <NavLink onClick={toggleMobileMenu}>
+							 <Link key={to} to={to}>{text}</Link>
+						</NavLink>
+					)}
+					{user && (
+						<button
+							onClick={handleSignout}
+						>
+							Logout
+						</button>
+					)}
+        </MobileNavList>
+      </MobileNav>
+
+		</HeaderContainer>
 	);
 };
 

@@ -1,12 +1,107 @@
 import React, { useState, useEffect } from "react";
+import styled from "styled-components";
 import { supabase } from "../utils/supabaseClient";
 import { useAuth } from "../context/AuthProvider";
 import { Link, useNavigate } from "react-router-dom";
+import Button from "./shared/Button";
 
 interface Message {
 	type: "error" | "success" | null;
 	text: string | null;
 }
+
+const Container = styled.div`
+	max-width: md;
+	width: full;
+	space-y: 8;
+	padding: 20px;
+	background-color: black;
+	color: white;
+`;
+
+const Alert = styled.div`
+	background-color: ${(props) =>
+		props.type === "error"
+			? "red"
+			: "green"}; // Replace with your actual colors for alert-error and alert-success
+	// Add more styles here
+`;
+
+const FormCard = styled.div`
+  relative;
+  flex;
+  flex-col;
+  min-w-0;
+  break-words;
+  w-full;
+  mb-6;
+  shadow-lg;
+  rounded-lg;
+  bg-black;
+  border-0;
+`;
+
+const Form = styled.form`
+  mt-8;
+  space-y-6;
+  flex;
+  flex-col;
+`;
+
+const Title = styled.div`
+  text-blueGray-400;
+  text-center;
+  mb-3;
+  font-bold;
+`;
+
+const Input = styled.input`
+	// Add shared input styles here
+	color : black;
+`;
+
+const Label = styled.label`
+  bg-white;
+`;
+
+const InputContainer = styled.div`
+  rounded-md;
+  shadow-sm;
+  -space-y-px;
+`;
+
+const ButtonContainer = styled.div`
+  flex;
+  justify-between;
+`;
+
+const SubmitButton = styled.button`
+  group;
+  ml-1;
+  text-white;
+  font-bold;
+  px-6;
+  py-4;
+  justify-center;
+  rounded;
+  outline-none;
+  focus:outline-none;
+  mr-1;
+  mb-1;
+  bg-blueGray-700;
+  active:bg-blueGray-600;
+  uppercase;
+  text-sm;
+  shadow;
+  hover:shadow-lg;
+  ease-linear;
+  transition-all;
+  duration-150;
+  
+  &:disabled {
+    opacity: 0.5; // Add more disabled styles as needed
+  }
+`;
 
 const LoginForm = () => {
 	const [email, setEmail] = useState("");
@@ -28,7 +123,6 @@ const LoginForm = () => {
 		const { data, error } = response;
 
 		const { user, session } = data;
-		console.log(data);
 		setLoading(false);
 
 		if (error) {
@@ -50,78 +144,55 @@ const LoginForm = () => {
 	}, []);
 
 	return (
-		<div className="max-w-md w-full space-y-8">
-			{message && (
-				<div
-					className={`alert ${
-						message.type === "error" ? "alert-error" : "alert-success"
-					}`}
-				>
-					{message.text}
-				</div>
-			)}
-			<div className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-black border-0">
-				<div className="rounded-t mb-0 px-12 py-6">
-					<form className="mt-8 space-y-6 flex flex-col" onSubmit={handleLogin}>
-						<div className="text-blueGray-400 text-center mb-3 font-bold">
-							<small>Sign in with credentials</small>
+		<Container>
+			{message && <Alert type={message.type}>{message.text}</Alert>}
+			<FormCard>
+				<Form onSubmit={handleLogin}>
+					<Title>
+						<small>Sign in with credentials</small>
+					</Title>
+					<input type="hidden" name="remember" value="true" />
+					<InputContainer>
+						<div>
+							<Label htmlFor="email-address">
+								<h6>Email</h6>
+							</Label>
+							<Input
+								id="email-address"
+								name="email"
+								type="email"
+								required
+								placeholder="Email address"
+								value={email}
+								onChange={(e) => setEmail(e.target.value)}
+							/>
 						</div>
-						<input type="hidden" name="remember" value="true" />
-						<div className="rounded-md shadow-sm -space-y-px">
-							<div>
-								<label htmlFor="email-address" className="bg-white">
-									<h6 className="text-blueGray-500 font-bold">Email</h6>
-								</label>
-								<input
-									id="email-address"
-									name="email"
-									type="email"
-									autoComplete="email"
-									required
-									className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-									placeholder="Email address"
-									value={email}
-									onChange={(e) => setEmail(e.target.value)}
-								/>
-							</div>
-							<div>
-								<label htmlFor="email-address" className="bg-white">
-									<h6 className="text-blueGray-500 font-bold">Password</h6>
-								</label>
-								<input
-									id="password"
-									name="password"
-									type="password"
-									autoComplete="current-password"
-									required
-									className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-									placeholder="Password"
-									value={password}
-									onChange={(e) => setPassword(e.target.value)}
-								/>
-							</div>
+						<div>
+							<Label htmlFor="password">
+								<h6>Password</h6>
+							</Label>
+							<Input
+								id="password"
+								name="password"
+								type="password"
+								required
+								placeholder="Password"
+								value={password}
+								onChange={(e) => setPassword(e.target.value)}
+							/>
 						</div>
-						<div className="flex justify-between">
-						    <Link to="/forgot" className="text-blueGray-400">
-                  <small>reset</small>
-                </Link>
-                <Link to="/register" className="text-blueGray-400">
-                  <small>Create new account</small>
-                </Link>
-						</div>
-						<div className="flex items-center justify-center pt-8">
-							<button
-								type="submit"
-								disabled={loading}
-								className="group ml-1 text-white font-bold px-6 py-4 justify-center rounded outline-none focus:outline-none mr-1 mb-1 bg-blueGray-700 active:bg-blueGray-600 uppercase text-sm shadow hover:shadow-lg ease-linear transition-all duration-150"
-							>
-								{loading ? "Signing in..." : "Sign in"}
-							</button>
-						</div>
-					</form>
-				</div>
-			</div>
-		</div>
+					</InputContainer>
+					<ButtonContainer>
+						<Link to="/forgot"><small>reset</small></Link>
+						<Link to="/register"><small>Create new account</small></Link>
+					</ButtonContainer>
+					<ButtonContainer>
+						<Button description={loading ? "Signing in..." : "Sign in"} handleSubmit={handleLogin}>
+						</Button>
+					</ButtonContainer>
+				</Form>
+			</FormCard>
+		</Container>
 	);
 };
 
