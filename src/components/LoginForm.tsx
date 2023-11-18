@@ -20,7 +20,11 @@ const Container = styled.div`
 	width: 50%;
 	display: flex;
 	justify-content: center;
-	radius: 0.5rem;
+	border-radius: 0.5rem;
+`;
+
+const FormHeader = styled.div`
+	padding: 1.5rem 3rem;
 `;
 
 const Alert = styled.div`
@@ -43,6 +47,7 @@ const FormCard = styled.div`
   rounded-lg;
   bg-black;
   border-0;
+	radius: 0.5rem;
 `;
 
 const Form = styled.form`
@@ -50,6 +55,7 @@ const Form = styled.form`
   space-y-6;
   flex;
   flex-col;
+	radius: 0.5rem;
 `;
 
 const Title = styled.div`
@@ -60,8 +66,13 @@ const Title = styled.div`
 `;
 
 const Input = styled.input`
-	// Add shared input styles here
-	color : black;
+appearance: none;
+display: block;
+width: 100%;
+padding: 0.5rem 0.75rem;
+border: 1px solid #d2d6dc;
+color: #4a5568;
+border-radius: 0.375rem;
 `;
 
 const Label = styled.label`
@@ -77,6 +88,13 @@ const InputContainer = styled.div`
 const ButtonContainer = styled.div`
   flex;
   justify-between;
+`;
+
+const FormTitle = styled.div`
+	color: #a0aec0;
+	text-align: center;
+	margin-bottom: 0.75rem;
+	font-weight: bold;
 `;
 
 const LoginForm = () => {
@@ -123,10 +141,12 @@ const LoginForm = () => {
 		<Container>
 			{message && <Alert type={message.type}>{message.text}</Alert>}
 			<FormCard>
+				<FormHeader>
+				    <FormTitle>
+							<small>Login with credentials</small>
+						</FormTitle>
+				</FormHeader>
 				<Form onSubmit={handleLogin}>
-					<Title>
-						<small>Sign in with credentials</small>
-					</Title>
 					<input type="hidden" name="remember" value="true" />
 					<InputContainer>
 						<div>

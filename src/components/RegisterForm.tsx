@@ -19,6 +19,7 @@ const FormContainer = styled.div`
 	border-radius: 0.5rem;
 	background-color: #000;
 	border: 0;
+	width: 50%;
 `;
 
 const FormHeader = styled.div`

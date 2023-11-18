@@ -2,7 +2,7 @@ import CoverLetterForm from "../components/CoverLetterForm";
 import Container from "../components/Container";
 import Layout from "../components/Layout";
 
-export default function CoverLetter() {
+export default function CvEnhancer() {
 	return (
 		<>
 			<Layout>
