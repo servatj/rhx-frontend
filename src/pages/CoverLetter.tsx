@@ -8,9 +8,7 @@ export default function Home() {
 			<Layout>
 				<main>
 					<Container>
-						<div className="flex p-10 justify-center">
 							<CoverLetterForm />
-						</div>
 					</Container>
 				</main>
 			</Layout>

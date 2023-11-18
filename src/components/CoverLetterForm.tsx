@@ -14,6 +14,15 @@ const supabase = createClient(
 	"edcca5f5ed07b2898336a315d493a9dbe69a675fb40ec5fc35e5a837ad69e2b3"
 );
 
+const Form = styled.form`
+	display: flex;
+	flex-direction: column;
+	background-color: black;
+	padding: 1.25rem;
+	border-radius: 0.5rem;
+	width: 80%;
+`;
+
 // Styled components
 const LoadingContainer = styled.div`
 	width: 100%;
@@ -47,6 +56,7 @@ const CoverLetterContainer = styled.div`
 	border-radius: 0.5rem;
 	box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
 	z-index: 10;
+	width: 80%;
 `;
 
 const CoverLetterTitle = styled.h2`
@@ -54,6 +64,13 @@ const CoverLetterTitle = styled.h2`
 	font-weight: bold;
 	margin-bottom: 1rem;
 	color: black;
+`;
+
+const H1 = styled.h1`
+	font-size: 1.25rem; // Equivalent to text-1xl in TailwindCSS
+	font-weight: bold;
+	margin-bottom: 1rem;
+	color: white;
 `;
 
 const CoverLetterForm = () => {
@@ -174,10 +191,10 @@ const CoverLetterForm = () => {
 	return isFormSubmitted ? (
 		renderCoverLetter()
 	) : (
-		<div className="container mx-auto bg-black p-8 rounded shadow">
-			<h1 className="text-2xl font-bold mb-4 text-white">
+		<Form>
+			<H1>
 				Create Cover Letter
-			</h1>
+			</H1>
 			{stage === 1 && (
 				<div>
 					<h2 className="text-1xl font-bold mb-4 text-white">
@@ -274,7 +291,7 @@ const CoverLetterForm = () => {
 					<Button handleSubmit={handleSubmit} description="submit" />
 				</div>
 			)}
-		</div>
+		</Form>
 	);
 };
 

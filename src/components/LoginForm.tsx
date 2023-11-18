@@ -17,6 +17,10 @@ const Container = styled.div`
 	padding: 20px;
 	background-color: black;
 	color: white;
+	width: 50%;
+	display: flex;
+	justify-content: center;
+	radius: 0.5rem;
 `;
 
 const Alert = styled.div`

@@ -19,6 +19,7 @@ const StyledInput = styled.textarea`
   border-radius: 4px;
   margin-bottom: 4px;
   width: 100%;
+  height: 500px;
   // Add more styles for the input here
 `;
 
