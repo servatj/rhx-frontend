@@ -133,6 +133,14 @@ const CoverLetterForm = () => {
 		});
 	};
 
+	const copyToClipboard = async () => {
+    try {
+      await navigator.clipboard.writeText(coverLetter);
+    } catch (err) {
+      console.error("Failed to copy: ", err);
+    }
+  };
+
 	const nextStage = () => setStage(stage + 1);
 	const prevStage = () => setStage(stage - 1);
 
@@ -158,6 +166,7 @@ const CoverLetterForm = () => {
 					<CoverLetterTitle> Cover Letter </CoverLetterTitle>
 					<CoverLetter text={coverLetter} />
 					<Button handleSubmit={prevStageCoverLetter} description="Back" />
+					<Button handleSubmit={copyToClipboard} description="Copy" />
 				</CoverLetterContainer>
 		);
 	};

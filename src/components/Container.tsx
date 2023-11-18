@@ -13,6 +13,7 @@ const StyledContainer = styled.div`
   flex-direction: column; // Arranges children vertically
   align-items: center; // Aligns children in the center horizontally
   justify-content: center; // Aligns children in the center vertically
+  background-color: #2D3748; /* bg-blueGray-700 */
   ${props => props.className && `.${props.className}`}; // Allows for additional class-based styling if needed
 `;
 
