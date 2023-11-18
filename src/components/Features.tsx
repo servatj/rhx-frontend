@@ -217,9 +217,8 @@ const Features = () => {
 								/>
 								<Button
 								  description="Notify me"
-									onClick={handleSubmit}
-								>
-								</Button>
+									handleSubmit={handleSubmit}
+								/>
 							</>
 						)}
 					</div>

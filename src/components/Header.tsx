@@ -50,24 +50,24 @@ const MobileMenuIcon = styled.button`
 `;
 
 const MobileNav = styled.div`
-  position: fixed;
-  top: 0;
-  right: 0;
-  width: 80%; // or 100% if you want full width
-  height: 100%;
-  background: #fff; // Background for the mobile menu
-  color: #000; // Text color for the mobile menu
-  transform: translateX(100%);
-  transition: transform 0.3s ease-in-out;
+	position: fixed;
+	top: 0;
+	right: 0;
+	width: 80%; // or 100% if you want full width
+	height: 100%;
+	background: #fff; // Background for the mobile menu
+	color: #000; // Text color for the mobile menu
+	transform: translateX(100%);
+	transition: transform 0.3s ease-in-out;
 
-  &.active {
-    transform: translateX(0);
-  }
+	&.active {
+		transform: translateX(0);
+	}
 `;
 
 const MobileNavList = styled(NavList)`
-  flex-direction: column;
-  padding: 2rem;
+	flex-direction: column;
+	padding: 2rem;
 `;
 
 const Header = () => {
@@ -90,28 +90,28 @@ const Header = () => {
 	};
 
 	const toggleMobileMenu = () => {
-		console.log('toggleMobileMenu');
-    setMobileMenuOpen(!isMobileMenuOpen);
-  };
+		console.log("toggleMobileMenu");
+		setMobileMenuOpen(!isMobileMenuOpen);
+	};
 
 	const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
 
 	return (
 		<HeaderContainer>
-			<Logo>LEVELY</Logo>
+			<Link to="/">
+				<Logo>LEVELY</Logo>
+			</Link>
 			<Nav>
 				<NavList>
 					{links.map(
 						({ to, text, visible }) =>
-							visible && <Link key={to} to={to}>{text}</Link>
+							visible && (
+								<Link key={to} to={to}>
+									{text}
+								</Link>
+							)
 					)}
-					{user && (
-						<button
-							onClick={handleSignout}
-						>
-							Logout
-						</button>
-					)}
+					{user && <button key={"logout"} onClick={handleSignout}>Logout</button>}
 				</NavList>
 			</Nav>
 			<MobileMenuIcon onClick={toggleMobileMenu}>
@@ -132,24 +132,23 @@ const Header = () => {
 					/>
 				</svg>
 			</MobileMenuIcon>
-			<MobileNav className={isMobileMenuOpen ? 'active' : ''}>
-        <MobileNavList>
-				  {links.map(
+			<MobileNav className={isMobileMenuOpen ? "active" : ""}>
+				<MobileNavList>
+					{links.map(
 						({ to, text, visible }) =>
-						visible && <NavLink onClick={toggleMobileMenu}>
-							 <Link key={to} to={to}>{text}</Link>
-						</NavLink>
+							visible && (
+								<NavLink onClick={toggleMobileMenu}>
+									<Link key={to} to={to}>
+										{text}
+									</Link>
+								</NavLink>
+							)
 					)}
-					{user && (
-						<button
-							onClick={handleSignout}
-						>
-							Logout
-						</button>
-					)}
-        </MobileNavList>
-      </MobileNav>
-
+					{user && <NavLink>
+						<a key={"logout"} onClick={handleSignout}>Logout</a>
+						</NavLink>}
+				</MobileNavList>
+			</MobileNav>
 		</HeaderContainer>
 	);
 };

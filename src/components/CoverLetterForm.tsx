@@ -4,11 +4,56 @@ import ReactMarkdown from "react-markdown";
 import gfm from "remark-gfm";
 import rehype from "rehype-raw";
 import documentation from "../assets/img/documentation.png";
+import Input from "./shared/Input";
+import Button from "./shared/Button";
+import TextArea from "./shared/TextArea";
+import styled from "styled-components";
 
 const supabase = createClient(
 	"https://fcglhscwklxxhveqgaef.supabase.co",
 	"edcca5f5ed07b2898336a315d493a9dbe69a675fb40ec5fc35e5a837ad69e2b3"
 );
+
+// Styled components
+const LoadingContainer = styled.div`
+	width: 100%;
+	padding-top: 24px;
+	@media (min-width: 768px) {
+		width: 50%;
+		padding-top: 0;
+	}
+`;
+
+const StyledImage = styled.img`
+	max-width: 100%;
+	border-radius: 0.5rem;
+	box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+		0 4px 6px -2px rgba(0, 0, 0, 0.05);
+	transform: scale(1) perspective(1040px) rotateY(-11deg) rotateX(2deg)
+		rotate(2deg);
+`;
+
+const LoadingSpinner = styled.div`
+	width: 4rem;
+	height: 4rem;
+	border-top: 4px solid #3182ce; // This is the tailwindcss blue-500 color
+	border-radius: 100%;
+	animation: spin 1s linear infinite;
+`;
+
+const CoverLetterContainer = styled.div`
+	background-color: white;
+	padding: 1.25rem;
+	border-radius: 0.5rem;
+	box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+`;
+
+const CoverLetterTitle = styled.h2`
+	font-size: 1.25rem; // Equivalent to text-1xl in TailwindCSS
+	font-weight: bold;
+	margin-bottom: 1rem;
+	color: black;
+`;
 
 const CoverLetterForm = () => {
 	const [stage, setStage] = useState(1);
@@ -90,6 +135,11 @@ const CoverLetterForm = () => {
 	const nextStage = () => setStage(stage + 1);
 	const prevStage = () => setStage(stage - 1);
 
+	const prevStageCoverLetter = () => {
+		setIsFormSubmitted(false);
+		setStage(1);
+	}
+
 	const CoverLetter = ({ text }) => {
 		return <div style={{ whiteSpace: "pre-line" }}>{text}</div>;
 	};
@@ -97,38 +147,17 @@ const CoverLetterForm = () => {
 	const renderCoverLetter = () => {
 		return isCoverLetterLoading ? (
 			<>
-				<div className="w-full md:w-6/12 px-4 pt-24 md:pt-0 lg:block">
-					<img
-						alt="..."
-						className="max-w-full rounded-lg shadow-xl"
-						style={{
-							transform:
-								"scale(1) perspective(1040px) rotateY(-11deg) rotateX(2deg) rotate(2deg)",
-						}}
-						src={documentation}
-					/>
-				</div>
-				<div className="w-16 h-16 border-t-4 border-blue-500 border-solid rounded-full animate-spin"></div>
+				<LoadingContainer>
+					<StyledImage alt="..." src={documentation} />
+				</LoadingContainer>
+				<LoadingSpinner />
 			</>
 		) : (
-			<div className="container mx-auto bg-white p-5 rounded shadow">
-				<h2 className="text-1xl font-bold mb-4 text-black"> Cover Letter </h2>
-
-				<CoverLetter text={coverLetter} />
-
-				<button
-					onClick={prevStage}
-					className="bg-gray-500 text-white px-4 py-2 rounded mr-2"
-				>
-					Back
-				</button>
-				<button
-					onClick={() => handleSubmit()}
-					className="bg-green-500 text-white mt-10 px-4 py-2 rounded"
-				>
-					Re - Submit
-				</button>
-			</div>
+				<CoverLetterContainer>
+					<CoverLetterTitle> Cover Letter </CoverLetterTitle>
+					<CoverLetter text={coverLetter} />
+					<Button handleSubmit={prevStageCoverLetter} description="Back" />
+				</CoverLetterContainer>
 		);
 	};
 
@@ -145,51 +174,46 @@ const CoverLetterForm = () => {
 						{" "}
 						Stage 1 - Personal Details{" "}
 					</h2>
-					<label className="block mb-2 text-white">Full Name</label>
-					<input
+					<Input
 						type="text"
 						name="name"
+						label="Full Name"
 						value={formData.name}
 						onChange={handleInputChange}
-						className="p-2 border rounded mb-4 w-full"
+						error={errors}
 					/>
-					{errors.name && <p className="text-red-500">{errors.name}</p>}
-					<label className="block mb-2 text-white">Address</label>
-					<input
+					<Input
 						type="text"
 						name="address"
 						value={formData.address}
+						label={"Address"}
 						onChange={handleInputChange}
-						className="p-2 border rounded mb-4 w-full"
+						error={errors}
 					/>
-					{errors.address && <p className="text-red-500">{errors.address}</p>}
-					<label className="block mb-2 text-white">Phone</label>
-					<input
+					<Input
 						type="text"
 						name="phone"
 						value={formData.phone}
+						label={"Phone"}
 						onChange={handleInputChange}
-						className="p-2 border rounded mb-4 w-full"
+						error={errors}
 					/>
-					{errors.phone && <p className="text-red-500">{errors.phone}</p>}
-					<label className="block mb-2 text-white">Email</label>
-					<input
+					<Input
 						type="text"
 						name="email"
 						value={formData.email}
+						label={"Email"}
 						onChange={handleInputChange}
-						className="p-2 border rounded mb-4 w-full"
+						error={errors}
 					/>
-					{errors.email && <p className="text-red-500">{errors.email}</p>}
-					<label className="block mb-2 text-white">Linkedin</label>
-					<input
+					<Input
 						type="text"
 						name="linkedin"
+						label={"Linkedin"}
 						value={formData.linkedin}
 						onChange={handleInputChange}
-						className="p-2 border rounded mb-4 w-full"
+						error={errors}
 					/>
-					{errors.name && <p className="text-red-500">{errors.name}</p>}
 					<button
 						onClick={nextStage}
 						className="bg-blueGray-700 active:bg-blueGray-600 text-white px-4 py-2 rounded"
@@ -201,33 +225,22 @@ const CoverLetterForm = () => {
 
 			{stage === 2 && (
 				<div>
-					<label className="block mb-2 text-white">Strong Points</label>
-					<input
+					<Input
 						type="text"
 						name="strongPoints"
 						value={formData.strongPoints}
 						onChange={handleInputChange}
-						className="p-2 border rounded mb-4 w-full"
+						label={"Strong Points"}
+						error={errors}
 					/>
 					<label className="block mb-2 text-white">Paste CV</label>
-					<textarea
+					<TextArea
 						name="pasteCV"
 						value={formData.pasteCV}
 						onChange={handleInputChange}
-						className="p-2 border rounded mb-4 w-full h-32"
 					/>
-					<button
-						onClick={prevStage}
-						className="bg-blueGray-700 active:bg-blueGray-600 text-white px-4 py-2 rounded mr-2"
-					>
-						Back
-					</button>
-					<button
-						onClick={nextStage}
-						className="bg-blueGray-700 active:bg-blueGray-600 text-white px-4 py-2 rounded"
-					>
-						Next
-					</button>
+					<Button handleSubmit={prevStage} description="back" />
+					<Button handleSubmit={nextStage} description="next" />
 				</div>
 			)}
 
@@ -247,29 +260,8 @@ const CoverLetterForm = () => {
 					<p className="text-black">Linkedin: {formData.linkedin}</p>
 					<p className="text-black">Strong Points: {formData.strongPoints}</p>
 					<p className="text-black">Paste CV: {formData.pasteCV}</p>
-					<button
-						onClick={prevStage}
-						className="bg-blueGray-700 active:bg-blueGray-600 text-white px-4 py-2 rounded mr-2"
-					>
-						Back
-					</button>
-					<button
-						onClick={() => handleSubmit()}
-						className="bg-blueGray-700 active:bg-blueGray-600 text-white mt-10 px-4 py-2 rounded"
-					>
-						Submit
-					</button>
-				</div>
-			)}
-			{submissionStatus === "success" && (
-				<div className="bg-green-500 text-white p-4 rounded mt-4">
-					Form data submitted successfully!
-				</div>
-			)}
-
-			{submissionStatus === "failure" && (
-				<div className="bg-red-500 text-white p-4 rounded mt-4">
-					There was an error submitting your data. Please try again.
+					<Button handleSubmit={prevStage} description="back" />
+					<Button handleSubmit={handleSubmit} description="submit" />
 				</div>
 			)}
 		</div>

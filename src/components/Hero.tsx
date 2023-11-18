@@ -52,14 +52,17 @@ const Image = styled.img`
   /* Your Image styles */
 `;
 
-const handleSubmit = (e: React.FormEvent<HTMLButtonElement>) => {
-  console.log('clicked')
-  const navigate = useNavigate();
-  navigate('/register');
-}
-
 // Hero component
 const Hero = () => {
+  
+  const navigate = useNavigate();
+  
+  const handleSubmit = (e: React.FormEvent<HTMLButtonElement>) => {
+    console.log('clicked')
+    navigate('/register');
+  }
+  
+
   return (
     <HeroContainer>
       <Container>

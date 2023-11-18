@@ -1,5 +1,4 @@
 import Footer from "./Footer";
-import Navbar from "./Navbars/AuthNavbar";
 import Header from "./Header"
 
 interface LayoutProps {
