@@ -26,7 +26,16 @@ const ErrorText = styled.p`
   // Add more styles for the error text here
 `;
 
-export default function Input({ label, name, type, value, onChange, error }) {
+interface InputProps {
+  label: string;
+  name: string;
+  type: string;
+  value: string;
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  error: any;
+}
+
+export default function Input({ label, name, type, value, onChange, error } : InputProps) {
   return (
     <Container>
       <StyledLabel>{label}</StyledLabel>

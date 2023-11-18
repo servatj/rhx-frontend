@@ -75,34 +75,6 @@ const ButtonContainer = styled.div`
   justify-between;
 `;
 
-const SubmitButton = styled.button`
-  group;
-  ml-1;
-  text-white;
-  font-bold;
-  px-6;
-  py-4;
-  justify-center;
-  rounded;
-  outline-none;
-  focus:outline-none;
-  mr-1;
-  mb-1;
-  bg-blueGray-700;
-  active:bg-blueGray-600;
-  uppercase;
-  text-sm;
-  shadow;
-  hover:shadow-lg;
-  ease-linear;
-  transition-all;
-  duration-150;
-  
-  &:disabled {
-    opacity: 0.5; // Add more disabled styles as needed
-  }
-`;
-
 const LoginForm = () => {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");

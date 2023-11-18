@@ -1,7 +1,13 @@
 import { useEffect, useState } from 'react'
 import { supabase } from '../utils/supabaseClient'
 
-export default function Avatar({ url, size, onUpload }) {
+interface AvatarProps {
+  url: string | null
+  size: number
+  onUpload: (event: any, filePath: string) => void
+}
+
+export default function Avatar({ url, size, onUpload }: AvatarProps) {
   const [avatarUrl, setAvatarUrl] = useState(null)
   const [uploading, setUploading] = useState(false)
 
@@ -9,7 +15,7 @@ export default function Avatar({ url, size, onUpload }) {
     if (url) downloadImage(url)
   }, [url])
 
-  async function downloadImage(path) {
+  async function downloadImage(path: string) {
     try {
       const { data, error } = await supabase.storage.from('avatars').download(path)
       if (error) {
@@ -22,7 +28,7 @@ export default function Avatar({ url, size, onUpload }) {
     }
   }
 
-  async function uploadAvatar(event) {
+  async function uploadAvatar(event: any) {
     try {
       setUploading(true)
 

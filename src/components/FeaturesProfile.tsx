@@ -1,11 +1,3 @@
-import {
-	BeakerIcon,
-	AcademicCapIcon,
-	PrinterIcon,
-	UserPlusIcon,
-	WrenchScrewdriverIcon,
-	AdjustmentsVerticalIcon,
-} from "@heroicons/react/24/solid";
 import FeatureBox from "./FeatureBox";
 import { Link } from "react-router-dom";
 

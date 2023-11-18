@@ -33,7 +33,12 @@ const Description = styled.p`
   color: #718096; /* This is the color for text-blueGray-500 */
 `;
 
-const FeatureBox = ({ title, description }) => {
+interface FeatureBoxProps {
+  title: string;
+  description: string;
+}
+
+const FeatureBox = ({ title, description }: FeatureBoxProps) => {
   return (
     <FeatureContainer>
       <Content>
