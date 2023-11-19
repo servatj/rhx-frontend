@@ -1,13 +1,34 @@
 import Card from "./shared/Card";
+import styled from "styled-components";
+
+const Top = styled.div`
+    display: flex;  
+    height: 100px;
+    width: 100%;
+    justify-content: center;
+    font-size: 32px;
+    color: white;
+`;
+
+const CardContainer = styled.div`
+    display: flex;
+    justify-content: center;
+    width: 100%;
+
+    media screen and (max-width: 768px) {
+        flex-direction: column;
+    }
+`;
 
 function PricingPlans() {
 	return (
-		<div className="bg-gray-900 text-white p-10">
-			<h1 className="text-4xl mb-10">
-				Find a plan to power your personal brand
-			</h1>
-
-			<div className="flex justify-between">
+		<div>
+            <Top>
+                <h1>
+                    Find a plan to power your personal brand
+                </h1>
+            </Top>
+			<CardContainer>
 				<Card
 					title="Free for life"
 					features={[
@@ -34,7 +55,7 @@ function PricingPlans() {
                     ]}
                     price={50}
                 />
-			</div>
+			</CardContainer>
 		</div>
 	);
 }
