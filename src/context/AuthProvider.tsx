@@ -1,7 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { supabase } from "../utils/supabaseClient";
 
-const AuthContext = createContext({});
+export const AuthContext = createContext({});
 
 export const useAuth = () => useContext(AuthContext);
 
@@ -18,6 +18,7 @@ const passwordReset = (email: string) =>
 const AuthProvider = ({ children }: any) => {
   const [auth, setAuth] = useState(false);
   const [user, setUser] = useState(null);
+  const [session, setSession] = useState(null);
 
   useEffect(() => {
     const { data } = supabase.auth.onAuthStateChange(async (event, session) => {
@@ -25,6 +26,7 @@ const AuthProvider = ({ children }: any) => {
         setAuth(false);
       } else if (event === "SIGNED_IN") {
         setUser(session?.user);
+        setSession(session);
         setAuth(true);
       } else if (event === "SIGNED_OUT") {
         setAuth(false);
@@ -37,7 +39,7 @@ const AuthProvider = ({ children }: any) => {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ auth, user, login, signOut, passwordReset }}>
+    <AuthContext.Provider value={{ auth, user, session, login, signOut, passwordReset }}>
       {children}
     </AuthContext.Provider>
   );

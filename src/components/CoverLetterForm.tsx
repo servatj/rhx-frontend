@@ -8,6 +8,8 @@ import Input from "./shared/Input";
 import Button from "./shared/Button";
 import TextArea from "./shared/TextArea";
 import styled from "styled-components";
+import { useAuth } from "../context/AuthProvider";
+import { apiFetch } from "../lib/api";
 
 const supabase = createClient(
 	"https://fcglhscwklxxhveqgaef.supabase.co",
@@ -89,39 +91,41 @@ const CoverLetterForm = () => {
 		pasteCV: "",
 	});
 
+	const { session }: any = useAuth();
+
 	const [submissionStatus, setSubmissionStatus] = useState("none");
 
-	const handleSubmit = async () => {
+	const handleSubmit = async (e: React.ChangeEvent<HTMLButtonElement>) => {
+		e.preventDefault();
 		if (!validate()) return;
 
 		console.log("Submitting form data...");
 		setIsCoverLetterLoading(true);
 		setIsFormSubmitted(true);
 		try {
-			const response = await fetch("https://api.levely.pro/api/cover-letter", {
-				method: "POST",
-				headers: {
-					"Content-Type": "application/json",
-				},
-				body: JSON.stringify({
-					name: formData.name,
-				}),
-			});
+			console.log(session);
 
-			if (!response.ok) {
+			const response = await apiFetch(
+				"http://localhost:5001/api/cover-letter",
+				"POST",
+				formData,
+				{
+					"x-auth-token": session.access_token,
+				}
+			);
+
+			console.log(response);
+
+			if (response.status !== 200) {
+				console.error("Failed to submit form data", response?.statusText);
+				setSubmissionStatus("failure");
 				throw new Error(`HTTP error! Status: ${response.status}`);
 			}
 
-			const responseData = await response.json();
-			setCoverLetter(responseData.message);
-			if (response && response.ok) {
-				console.log("Form data submitted successfully");
-				setIsCoverLetterLoading(false);
-				setSubmissionStatus("success");
-			} else {
-				console.error("Failed to submit form data", response?.statusText);
-				setSubmissionStatus("failure");
-			}
+			setCoverLetter(response.message);
+			console.log("Form data submitted successfully");
+			setIsCoverLetterLoading(false);
+			setSubmissionStatus("success");
 		} catch (error) {
 			console.error(error);
 		}
@@ -151,12 +155,12 @@ const CoverLetterForm = () => {
 	};
 
 	const copyToClipboard = async () => {
-    try {
-      await navigator.clipboard.writeText(coverLetter);
-    } catch (err) {
-      console.error("Failed to copy: ", err);
-    }
-  };
+		try {
+			await navigator.clipboard.writeText(coverLetter);
+		} catch (err) {
+			console.error("Failed to copy: ", err);
+		}
+	};
 
 	const nextStage = () => setStage(stage + 1);
 	const prevStage = () => setStage(stage - 1);
@@ -164,7 +168,7 @@ const CoverLetterForm = () => {
 	const prevStageCoverLetter = () => {
 		setIsFormSubmitted(false);
 		setStage(1);
-	}
+	};
 
 	const CoverLetter = ({ text }) => {
 		return <div style={{ whiteSpace: "pre-line" }}>{text}</div>;
@@ -179,12 +183,12 @@ const CoverLetterForm = () => {
 				<LoadingSpinner />
 			</>
 		) : (
-				<CoverLetterContainer>
-					<CoverLetterTitle> Cover Letter </CoverLetterTitle>
-					<CoverLetter text={coverLetter} />
-					<Button handleSubmit={prevStageCoverLetter} description="Back" />
-					<Button handleSubmit={copyToClipboard} description="Copy" />
-				</CoverLetterContainer>
+			<CoverLetterContainer>
+				<CoverLetterTitle> Cover Letter </CoverLetterTitle>
+				<CoverLetter text={coverLetter} />
+				<Button handleSubmit={prevStageCoverLetter} description="Back" />
+				<Button handleSubmit={copyToClipboard} description="Copy" />
+			</CoverLetterContainer>
 		);
 	};
 
@@ -192,9 +196,7 @@ const CoverLetterForm = () => {
 		renderCoverLetter()
 	) : (
 		<Form>
-			<H1>
-				Create Cover Letter
-			</H1>
+			<H1>Create Cover Letter</H1>
 			{stage === 1 && (
 				<div>
 					<h2 className="text-1xl font-bold mb-4 text-white">
