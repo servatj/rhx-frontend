@@ -106,7 +106,7 @@ const CoverLetterForm = () => {
 			console.log(session);
 
 			const response = await apiFetch(
-				"https://levely.pro/api/cover-letter",
+				"https://api.levely.pro/api/cover-letter",
 				"POST",
 				formData,
 				{
